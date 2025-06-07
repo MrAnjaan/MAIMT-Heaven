@@ -3,20 +3,28 @@ const UserModel = require("../Models/User");
 
 const student = require("../models/student");
 
+const bcrypt=require("bcrypt");
 
 
 
 const login = async (req, res) => {
     try {
-        const { name, email, student_id} = req.body;
+        const { name, email, student_id,password} = req.body;
+    
         const user = await UserModel.findOne({ student_id,email});
+
         const errorMsg = 'Auth failed email or password is wrong';
         if (!user) {
             return res.status(403)
                 .json({ message: errorMsg, success: false });
         }
-        
-        const jwtToken = jwt.sign(
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(403)
+            .json({ message: errorMsg, success: false });
+            }
+            
+            const jwtToken = jwt.sign(
             { email: user.email, name: user.name },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
