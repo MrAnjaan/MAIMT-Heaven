@@ -10,7 +10,7 @@ const Contact = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-500 to-blue-700 text-white p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-green-500 to-green-700 text-white p-6">
       {/* Hero Section */}
       <div className="text-center max-w-3xl">
         <h1 className="text-4xl font-extrabold mb-4">Contact Us</h1>

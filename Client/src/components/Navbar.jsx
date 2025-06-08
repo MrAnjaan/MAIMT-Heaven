@@ -1,12 +1,25 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { handleSuccess } from "../utils";
+import { ToastContainer } from "react-toastify";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogout = (e)=>{
+      localStorage.removeItem('token');
+      localStorage.removeItem('loggedInUser');
+      handleSuccess("User logged out successfully");
+      setTimeout(()=>{
+        navigate('/login');
+      },1000)
+  }
 
   return (
     <header className="flex items-center justify-between px-8 py-4 bg-emerald-600 shadow-md">
@@ -30,7 +43,7 @@ export default function Navbar() {
       </nav>
 
       {/* Logout Button */}
-      <Button variant="outline" className="border-white hover:bg-red-500 hover:text-white transition hidden md:block">
+      <Button onClick={handleLogout} variant="outline" className="absolute right-4 top-4 border-white hover:bg-red-500 hover:text-white transition hidden md:block">
         Logout
       </Button>
 
@@ -56,12 +69,13 @@ export default function Navbar() {
             <Link to="/contact" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
               Contact
             </Link>
-            <Button variant="outline" className="border-gray-800 hover:bg-red-500 hover:text-white transition" onClick={() => setOpen(false)}>
+            <Button  variant="outline" className="border-gray-800 hover:bg-red-500 hover:text-white transition" onClick={handleLogout}>
               Logout
             </Button>
           </nav>
         </SheetContent>
       </Sheet>
+      <ToastContainer />
     </header>
   );
 }

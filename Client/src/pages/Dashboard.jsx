@@ -6,12 +6,12 @@ import Footer from '../components/Footer';
 
 const Dashboard = () => {
 
-    const [student, setStudent] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState('');
+console.log(loggedInUser)
     useEffect(() => {
-    axios.get("http://localhost:4000/dashboard") // Replace with your actual API URL
-      .then((response) => setStudent(response.data))
-      .catch((error) => console.error("Error fetching student data:", error));
-  }, []);
+      setLoggedInUser(JSON.parse(localStorage.getItem('loggedInUser'))) 
+      console.log(loggedInUser)
+      }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -31,12 +31,13 @@ const Dashboard = () => {
 
         <div className="p-6">
       <h2 className="text-2xl font-bold">Student Dashboard</h2>
-      {student ? (
+      {loggedInUser ? (
         <div className="mt-4 p-4 border rounded bg-gray-100">
-          <p><strong>Name:</strong> {student.name}</p>
-          <p><strong>Roll Number:</strong> {student.rollNumber}</p>
-          <p><strong>Course:</strong> {student.course}</p>
-          <p><strong>Email:</strong> {student.email}</p>
+          
+          <p><strong>Student Id:</strong> {loggedInUser.student_id}</p>
+          <p><strong>Name:</strong> {loggedInUser.name}</p>
+          {/* <p><strong>Course:</strong> {loggedInUser.course}</p> */}
+          <p><strong>Email:</strong> {loggedInUser.email}</p>
         </div>
       ) : (
         <p>Loading student data...</p>
