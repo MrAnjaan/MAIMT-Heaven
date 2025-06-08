@@ -19,6 +19,7 @@ next();
 const signupvalidation=(req,res,next)=>{
     const schema=joi.object({
       
+
         email:joi.string().email().required(),
        student_id:joi.string().min(2).max(9).required(),
        password: joi.string().min(5).required()
