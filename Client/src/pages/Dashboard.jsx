@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
 
@@ -28,6 +29,9 @@ console.log(loggedInUser)
            Your one-stop destination for academic resources and success.
           </p>
         </div>
+         {/* <Button variant="default" size="lg">
+           <Link to={'/course'}>Get Started </Link>
+          </Button> */}
 
         <div className="p-6">
       <h2 className="text-2xl font-bold">Student Dashboard</h2>

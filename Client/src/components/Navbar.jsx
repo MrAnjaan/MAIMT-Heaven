@@ -12,13 +12,13 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
-  const handleLogout = (e)=>{
-      localStorage.removeItem('token');
-      localStorage.removeItem('loggedInUser');
-      handleSuccess("User logged out successfully");
-      setTimeout(()=>{
-        navigate('/login');
-      },1000)
+  const handleLogout = (e) => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedInUser');
+    handleSuccess("User logged out successfully");
+    setTimeout(() => {
+      navigate('/login');
+    }, 1000)
   }
 
   return (
@@ -31,7 +31,7 @@ export default function Navbar() {
         <Link to="/dashboard" className="text-white hover:text-gray-300 transition">
           Dashboard
         </Link>
-        <Link to="/resources" className="text-white hover:text-gray-300 transition">
+        <Link to="/courses" className="text-white hover:text-gray-300 transition">
           Resources
         </Link>
         <Link to="/about" className="text-white hover:text-gray-300 transition">
@@ -48,33 +48,36 @@ export default function Navbar() {
       </Button>
 
       {/* Mobile Menu */}
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="text-white" />
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left">
-          <nav className="flex flex-col space-y-4">
-            <div className="text-2xl font-bold text-black">MyLogo</div>
-            <Link to="/dashboard" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
-              Dashboard
-            </Link>
-            <Link to="/resources" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
-              Resources
-            </Link>
-            <Link to="/about" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
-              About
-            </Link>
-            <Link to="/contact" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
-              Contact
-            </Link>
-            <Button  variant="outline" className="border-gray-800 hover:bg-red-500 hover:text-white transition" onClick={handleLogout}>
-              Logout
+      <div className="md:hidden ml-auto">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Menu className="text-white" />
             </Button>
-          </nav>
-        </SheetContent>
-      </Sheet>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <nav className="flex flex-col space-y-4">
+              <div className="text-2xl font-bold text-black">MyLogo</div>
+              <Link to="/dashboard" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
+                Dashboard
+              </Link>
+              <Link to="/resources" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
+                Resources
+              </Link>
+              <Link to="/about" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
+                About
+              </Link>
+              <Link to="/contact" className="text-gray-800 hover:text-gray-900 font-bold" onClick={() => setOpen(false)}>
+                Contact
+              </Link>
+              <Button variant="outline" className="border-gray-800 hover:bg-red-500 hover:text-white transition" onClick={handleLogout}>
+                Logout
+              </Button>
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </div>
+
       <ToastContainer />
     </header>
   );

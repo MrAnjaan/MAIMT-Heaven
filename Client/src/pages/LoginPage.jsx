@@ -14,7 +14,6 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const [loginInfo, setLoginInfo] = useState({
-    name: '',
     password: '',
     email: '',
     student_id: ''
@@ -30,8 +29,8 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { name, email, student_id, password } = loginInfo;
-    if (!name || !email || !student_id || !password) { ////////////////////u have to update///////////////////////////////
+    const {email, student_id, password } = loginInfo;
+    if (!email || !student_id || !password) {
       return handleError('All fields are required');
     }
     // API call to signup
@@ -88,9 +87,7 @@ export default function LoginPage() {
           <p className="max-w-2xl mx-auto text-lg text-gray-600 ">
             Log in to access exclusive resources and notes.
           </p>
-          {/* <Button variant="default" size="lg">
-            Get Started
-          </Button> */}
+         
         </div>
       </main>
 
@@ -106,10 +103,10 @@ export default function LoginPage() {
                 <Label htmlFor="student_id">Student ID</Label>
                 <Input id="student_id" name='student_id' type="text" placeholder="Enter your student id" onChange={handleChange} value={loginInfo.student_id} />
               </div>
-              <div>
+              {/* <div>
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" type="text" name='name' placeholder="Enter your name" onChange={handleChange} value={loginInfo.name} />
-              </div>
+              </div> */}
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input id="email" type="email" name='email' placeholder="Enter your email" onChange={handleChange} value={loginInfo.email} />

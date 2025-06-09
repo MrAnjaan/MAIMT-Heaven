@@ -8,6 +8,8 @@ import Resources from "./pages/Resources"
 import SignupPage from "./pages/SignupPage"
 import { useState } from "react"
 import RefreshHandler from "./RefreshHandler"
+import Semester from "./pages/Semester"
+import Courses from "./pages/Courses"
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -28,7 +30,9 @@ function App() {
         <Route path="/dashboard" element= {<PrivateRoute element={<Dashboard /> } />}/>
         <Route path="/contact" element= {<PrivateRoute element={<Contact /> } />} />
         <Route path="/about" element= {<PrivateRoute element={<About /> } />} />
-        <Route path="/resources" element= {<PrivateRoute element={<Resources /> } />} />
+        <Route path="/resources/:courseName/:semester" element= {<PrivateRoute element={<Resources /> } />} />
+        <Route path="/semester/:courseName" element= {<PrivateRoute element={<Semester /> } />} />
+        <Route path="/courses" element= {<PrivateRoute element={<Courses /> } />} />
       </Routes>
     </div>
   )

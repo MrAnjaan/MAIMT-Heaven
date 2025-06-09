@@ -10,7 +10,6 @@ const bcrypt=require("bcrypt");
 const login = async (req, res) => {
     try {
         const { name, email, student_id,password} = req.body;
-    
         const user = await UserModel.findOne({ student_id,email});
 
         const errorMsg = 'Auth failed email or password is wrong';
