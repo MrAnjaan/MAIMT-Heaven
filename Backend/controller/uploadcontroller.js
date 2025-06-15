@@ -7,7 +7,7 @@
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-    const fileUrl = `http://localhost:5000/upload/${req.file.filename}`;
+    const fileUrl = `http://localhost:4000/upload/${req.file.filename}`;
     const {coursename,semester,subject,filetype}=req.body;
 
   const existingCourse = await CourseData.findOne({
@@ -18,7 +18,7 @@
   console.log("existingCourse:",existingCourse);
     
   if (existingCourse) {
-  const fileUrl = `http://localhost:5000/upload/${req.file.filename}`;
+  const fileUrl = `http://localhost:4000/upload/${req.file.filename}`;
 
   if (req.body.fileType == "syllabus") {
     existingCourse.syllabus = { url: fileUrl, public_id: req.file.filename };

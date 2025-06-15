@@ -4,6 +4,7 @@ require('dotenv').config();
 const connectdb=require("./config/db")
 const cors=require("cors");
 const userRoutes = require("./router/loginroute");
+const path=require(path);
 
 
 const PORT=process.env.PORT||3000;
@@ -13,7 +14,7 @@ app.use(express.json())
 
 app.use(express.urlencoded({extended:true}));
 
-app.use(express.static("upload"));
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 
 app.use("/user",userRoutes)
