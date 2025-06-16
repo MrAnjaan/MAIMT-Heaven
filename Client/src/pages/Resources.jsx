@@ -4,14 +4,14 @@
 // import Footer from '../components/Footer';
 
 // const Resources = () => {
-//   const { courseName, semester } = useParams();
+//   const { coursename, semester } = useParams();
 
 //   return (
 //     <div>
 //       <Navbar />
 //       {/* bg-gradient-to-b from-indigo-500 to-indigo-700 text-white p-6 */}
 //       <div className="flex flex-col items-center justify-center min-h-screen ">
-//         <h1 className="text-4xl font-extrabold mb-4">Course: {courseName}</h1>
+//         <h1 className="text-4xl font-extrabold mb-4">Course: {coursename}</h1>
 //         <h2 className="text-3xl font-bold mb-4">Semester: {semester}</h2>
 //         {/* You can now load resources based on course and semester */}
 //       </div>
@@ -30,7 +30,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const Resources = () => {
-  const { courseName, semester } = useParams();
+  const { coursename, semester } = useParams();
   const [resources, setResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -39,11 +39,12 @@ const Resources = () => {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await axios.post('http://localhost:4000/resources', {
-          courseName,
+        console.log(coursename,semester)
+        const response = await axios.post('http://localhost:4000/user/resource', {
+          coursename,
           semester
         });
-        setResources(response.data);
+        setResources(response.data.data);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch resources.');
@@ -52,13 +53,13 @@ const Resources = () => {
     };
 
     fetchResources();
-  }, [courseName, semester]);
+  }, [coursename, semester]);
 
   return (
     <div>
       <Navbar />
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-500 to-indigo-700 text-white p-6">
-        <h1 className="text-4xl font-extrabold mb-4">Course: {courseName}</h1>
+        <h1 className="text-4xl font-extrabold mb-4">Course: {coursename}</h1>
         <h2 className="text-3xl font-bold mb-8">Semester: {semester}</h2>
 
         {loading ? (
@@ -82,22 +83,22 @@ const Resources = () => {
                   <tr key={index} className="border-t hover:bg-gray-100">
                     <td className="py-3 px-4">{item.subject}</td>
                     <td className="py-3 px-4">
-                      <a href={item.syllabusPdf} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      <a href={item.syllabus.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                         View PDF
                       </a>
                     </td>
                     <td className="py-3 px-4">
-                      <a href={item.bookPdf} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      <a href={item.books.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                         View PDF
                       </a>
                     </td>
                     <td className="py-3 px-4">
-                      <a href={item.pyqPdf} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      <a href={item.previousPapers} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                         View PDF
                       </a>
                     </td>
                     <td className="py-3 px-4">
-                      <a href={item.handwrittenNotesPdf} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+                      <a href={item.otherNotes} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
                         View PDF
                       </a>
                     </td>

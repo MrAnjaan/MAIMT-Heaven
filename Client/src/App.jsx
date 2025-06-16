@@ -30,8 +30,8 @@ function App() {
         <Route path="/dashboard" element= {<PrivateRoute element={<Dashboard /> } />}/>
         <Route path="/contact" element= {<PrivateRoute element={<Contact /> } />} />
         <Route path="/about" element= {<PrivateRoute element={<About /> } />} />
-        <Route path="/resources/:courseName/:semester" element= {<PrivateRoute element={<Resources /> } />} />
-        <Route path="/semester/:courseName" element= {<PrivateRoute element={<Semester /> } />} />
+        <Route path="/resources/:coursename/:semester" element= {<PrivateRoute element={<Resources /> } />} />
+        <Route path="/semester/:coursename" element= {<PrivateRoute element={<Semester /> } />} />
         <Route path="/courses" element= {<PrivateRoute element={<Courses /> } />} />
       </Routes>
     </div>
