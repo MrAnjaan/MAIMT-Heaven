@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     cb(null, "upload/"); // local temporary folder
   },
   filename: (req, file, cb) => {
-    return cb(null,`${Date.now()}-${file.originalname}`) ; // unique filename
+    return cb(null, `${Date.now()}-${file.originalname}`); // unique filename
   },
 });
 
